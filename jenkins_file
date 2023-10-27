@@ -7,10 +7,11 @@ pipeline {
             }
         }
         stage('Test') {
-            steps {
-                sh 'podman run -v $PWD:docker.io/library/python tests.py'
-            }
-        }
+    steps {
+        sh 'C:\\Python3116\\python.exe tests.py'
+    }
+}
+
     }
 }
 
