@@ -12,15 +12,12 @@ pipeline {
                 git changelog: false, poll: false, url: 'https://github.com/0lhakitura/Pytest_Test_Framework.git'
             }
         }
-           agent {
-        docker {
-            image 'docker.io/library/python:latest'
-            args '-v $PWD:/app -w /app'
+           stages {
+        stage('Python Test') {
+            steps {
+                sh 'python3 tests.py'
+            }
         }
-    }
-
-
-
     }
 }
 
