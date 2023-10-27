@@ -8,9 +8,10 @@ pipeline {
         }
         stage('Test') {
     steps {
-        bat(script: 'C:\\Python3116\\python.exe tests.py')
+        sh 'C:/Python3116/python.exe tests.py'
     }
 }
+
 
 
     }
