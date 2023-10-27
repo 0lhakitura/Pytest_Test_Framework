@@ -6,9 +6,9 @@ pipeline {
                 git changelog: false, poll: false, url: 'https://github.com/0lhakitura/Pytest_Test_Framework.git'
             }
         }
-        stage('Test') {
+       stage ('Test'){
     steps {
-        sh 'python3 tests.py'
+        sh 'export PATH="/usr/bin:$PATH"; python3 tests.py'
     }
 }
 
