@@ -8,7 +8,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'docker.io/library/python tests.py'
+                sh 'podman run -v $PWD:docker.io/library/python tests.py'
             }
         }
     }
