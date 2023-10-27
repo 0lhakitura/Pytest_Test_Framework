@@ -1,16 +1,23 @@
 pipeline {
-    agent any
+       agent {
+        docker {
+            image 'docker.io/library/python:latest'
+            args '-v $PWD:/app -w /app'
+        }
+    }
+
     stages {
         stage('GIT Checkout') {
             steps {
                 git changelog: false, poll: false, url: 'https://github.com/0lhakitura/Pytest_Test_Framework.git'
             }
         }
-       stage ('Test'){
-    steps {
-        sh 'export PATH="/usr/bin:$PATH"; python3 tests.py'
+           agent {
+        docker {
+            image 'docker.io/library/python:latest'
+            args '-v $PWD:/app -w /app'
+        }
     }
-}
 
 
 
