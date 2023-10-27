@@ -8,7 +8,7 @@ pipeline {
         }
         stage('Test') {
     steps {
-        sh 'C:/Python3116/python.exe tests.py'
+        sh 'python3 tests.py'
     }
 }
 
