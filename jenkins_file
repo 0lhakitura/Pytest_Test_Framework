@@ -1,19 +1,33 @@
-stages {
-    stage('Build') {
-        steps {
-            echo 'Building...'
+ipeline {
+        agent any
+        stages {
+            stage('Test') {
+                steps {
+                    echo 'Hello World ...'
+                }
+            }
         }
     }
 
-    stage('Test') {
+pipeline {
+agent any
+stages {
+    stage ('GIT Checkout'){
         steps {
-            echo 'Testing...'
+            git changelog: false, poll: false, url: 'https://github.com/0lhakitura/Pytest_Test_Framework.git'
         }
     }
     
-    stage('Deploy') {
+    stage('build') {
+  steps {
+    sh 'pip install -r requirements.txt'
+  }
+}
+    stage ('Test'){
         steps {
-            echo 'Deploying...'
+            sh 'python tests.py'
         }
     }
 }
+}
+
