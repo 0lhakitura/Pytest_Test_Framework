@@ -1,9 +1,5 @@
 pipeline {
-    agent {
-        podman {
-            image 'youthful_mcnulty'  // Use the desired Python version
-        }
-    }
+    agent any
     stages {
         stage('GIT Checkout') {
             steps {
