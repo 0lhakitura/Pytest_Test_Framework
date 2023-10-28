@@ -1,18 +1,26 @@
 pipeline {
-       agent any
+    agent {
+        node {
+            label 'Built-In Node'  // Replace with your Jenkins agent label with Podman
+        }
+    }
     stages {
-        stage('GIT Checkout') {
+        stage('Pull Docker Image') {
             steps {
-                git changelog: false, poll: false, url: 'https://github.com/0lhakitura/Pytest_Test_Framework.git'
+                script {
+                    def imageName = 'docker.io/library/python:latest'  // Use the desired Python version
+                    def podmanCmd = "podman pull $imageName"
+                    sh podmanCmd
+                }
             }
         }
-           stages {
-        stage('Python Test') {
-            script {
-                sh 'python tests.py'
+        stage('Test') {
+            steps {
+                sh 'podman run -v $PWD:/app -w /app docker.io/library/python python tests.py'
             }
         }
     }
 }
+
 
 
