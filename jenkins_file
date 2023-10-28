@@ -1,11 +1,5 @@
 pipeline {
-       agent {
-        docker {
-            image 'docker.io/library/python:latest'
-            args '-v $PWD:/app -w /app'
-        }
-    }
-
+       agent any
     stages {
         stage('GIT Checkout') {
             steps {
