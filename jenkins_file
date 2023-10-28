@@ -1,22 +1,26 @@
 pipeline {
-  agent any
-  tools {
-    python 'Python'
-  }
-  stages {
-    stage('Checkout') {
-      steps {
-        git https://github.com/0lhakitura/Pytest_Test_Framework.git
-      }
+    agent any
+    tools {
+        // Define the Python tool named 'Python' with the desired version.
+        // Make sure 'Python' matches the tool name in your Jenkins configuration.
+        python 'Python'
     }
-    stage('Test') {
-      steps {
-        // Run the tests
-        sh 'python tests.py'
-      }
+    stages {
+        stage('Checkout') {
+            steps {
+                // Use the 'checkout' step to clone the repository.
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/0lhakitura/Pytest_Test_Framework.git']]])
+            }
+        }
+        stage('Test') {
+            steps {
+                // Run the tests
+                sh 'python tests.py'
+            }
+        }
     }
-  }
 }
+
 
 
 
