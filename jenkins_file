@@ -1,25 +1,23 @@
 pipeline {
-    agent any
-    tools {
-        // Define the Python tool named 'Python' with the desired version.
-        // Make sure 'Python' matches the tool name in your Jenkins configuration.
-        python 'Python'
+    agent {
+        podman {
+            image 'youthful_mcnulty'  // Use the desired Python version
+        }
     }
     stages {
-        stage('Checkout') {
+        stage('GIT Checkout') {
             steps {
-                // Use the 'checkout' step to clone the repository.
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/0lhakitura/Pytest_Test_Framework.git']]])
+                git changelog: false, poll: false, url: 'https://github.com/0lhakitura/Pytest_Test_Framework.git'
             }
         }
         stage('Test') {
             steps {
-                // Run the tests
                 sh 'python tests.py'
             }
         }
     }
 }
+
 
 
 
