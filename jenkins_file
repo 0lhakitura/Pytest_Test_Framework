@@ -1,21 +1,21 @@
 pipeline {
-    agent any
-    stages {
-        stage('Pull Docker Image') {
-            steps {
-                script {
-                    def imageName = 'docker.io/library/python:latest'  // Use the desired Python version
-                    def podmanCmd = "podman pull $imageName"
-                    sh podmanCmd
-                }
-            }
-        }
-        stage('Test') {
-            steps {
-                sh 'podman run -v $PWD:/app -w /app docker.io/library/python python tests.py'
-            }
-        }
+  agent any
+  tools {
+    python 'Python'
+  }
+  stages {
+    stage('Checkout') {
+      steps {
+        git https://github.com/0lhakitura/Pytest_Test_Framework.git
+      }
     }
+    stage('Test') {
+      steps {
+        // Run the tests
+        sh 'python tests.py'
+      }
+    }
+  }
 }
 
 
