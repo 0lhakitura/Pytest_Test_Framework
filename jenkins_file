@@ -7,10 +7,15 @@ pipeline {
             }
         }
         stage('Test') {
-            steps {
-                sh 'python tests.py'
-            }
-        }
+  steps {
+    sh 'echo "Printing version of python executable"'
+    sh """
+      which python
+      python --version
+    """
+    sh 'python tests.py'
+  }
+}
     }
 }
 
