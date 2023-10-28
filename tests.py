@@ -14,7 +14,7 @@ def conn():
 
 
 def test_address_table_row_count(conn):
-    cursor = conn.cursor(
+    cursor = conn.cursor()
     cursor.execute('SELECT COUNT(*) FROM AdventureWorks2012.[Person].[Address]')
     count = cursor.fetchone()[0]
     assert count == 19614
