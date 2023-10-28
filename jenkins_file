@@ -1,9 +1,5 @@
 pipeline {
-    agent {
-        node {
-            label 'Built-In Node'  // Replace with your Jenkins agent label with Podman
-        }
-    }
+    agent any
     stages {
         stage('Pull Docker Image') {
             steps {
